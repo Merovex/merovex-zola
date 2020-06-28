@@ -1,0 +1,23 @@
+// body > header {
+//   display: flex;
+//   background: red;
+//   border: 1px solid red;
+//   height: 3em;
+//   align-items: center;
+//   justify-content: space-between;
+// }
+// body > main {
+//   flex-grow: 1;
+//   min-height: calc(100vh - 5em);
+//   display: flex;
+//   justify-content: space-around;
+// }
+// body > footer {
+//   display: flex;
+//   background: blue;
+//   border: 1px solid blue;
+//   height: 2em;
+//   justify-content: space-around;
+//   flex-shrink: 0;
+//   font-size: 0.85rem;
+// }

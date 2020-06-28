@@ -1,0 +1,10 @@
+name = "Merovex"
+description = "Theme for Merovex"
+license = "Rights Reserved"
+homepage = "https://github.com/Merovex/merovex-zola"
+min_version = "0.1.3"
+demo = "https://example.com"
+
+[author]
+name = "José Lopes"
+homepage = "https://merovex.com"

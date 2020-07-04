@@ -1,0 +1,16 @@
+{% extends "index.html" %}
+{% block content %}
+<article class="posts">
+  <h1>Blog</h1>
+  <ul>
+  {%- for post in section.pages | reverse %}
+    <li>
+      <time datetime="{{ post.date }}">
+        {{- post.date | date(format="%e %B %Y") -}}
+      </time>
+      <a href="{{ post.permalink | safe}}">{{ post.title }}</a>
+    </li>
+  {%- endfor %}
+  </ul>
+</article>
+{% endblock content %}

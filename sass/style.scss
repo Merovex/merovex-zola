@@ -1,4 +1,23 @@
 @import 'normalize';
+@import 'accessibility';
 @import 'framework';
-// @import 'navbar';
 @import 'page';
+@import 'post';
+@import '404';
+@import 'button';
+@import 'form';
+@import 'headings';
+@import 'navbar';
+
+a,
+area,
+button,
+[role="button"],
+input:not([type=range]),
+label,
+select,
+summary,
+textarea {
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+}

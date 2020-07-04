@@ -1,32 +1,49 @@
+@media
+(-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+  /* Retina-specific stuff here */
+  body {
+    font-weight: 450;
+  }
+}
+@media screen {
+  body {
+    font-size: 21px;
+    flex-direction: column;
+    background: var(--background) !important;
+    color: var(--foreground);
+    a {
+      color: var(--blue);
+    }
+  }
+}
 html {
   body {
     & > header {
       display: flex;
-      background: red;
-      border: 1px solid red;
       height: 3em;
       align-items: center;
       justify-content: space-around;
     }
     & > main {
       flex-grow: 1;
-      min-height: calc(100vh - 4.9em);
+      min-height: calc(100vh - 4.5em);
       display: flex;
-
       justify-content: space-around;
+      font-family: var(--font-body);
     }
     & > footer {
       display: flex;
       line-height: 1;
-      border: 1px solid blue;
-      height: 2em;
+      background: rgba(#000, 0.2);
+      color: white;
+      height: 2.5em;
       flex-direction: row;
       justify-content: space-around;
       align-items: center;
       font-size: 0.85rem;
       width: 100%;
       & > * {
-        border: 1px solid green;
       }
     }
   }

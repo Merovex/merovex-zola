@@ -1,39 +1,47 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
-
-    <title>{% block title %}{{ config.title }}{% endblock title %}</title>
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather|Oswald|Source+Sans+Pro">
-    <link rel="stylesheet" href="{{ get_url(path="style.css", trailing_slash=false) }}">
-
-    {% if config.generate_feed %}
-      <link rel="alternate" type={% if config.feed_filename == "atom.xml" %}"application/atom+xml"{% else %}"application/rss+xml"{% endif %} title="RSS" href="{{ get_url(path=config.feed_filename) | safe }}">
-    {% endif %}
-  </head>
-  <body>
-    <header>
-      <a href="/" class="brand">
-        LOGO
-        BRAND
-      </a>
-      <nav>
-        links
-      </nav>
-    </header>
-    <main>
-      <article class="page">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+{% extends "default.html" %}
+{% block content %}
+  <section class="bookshelf">
+    <h2>Books</h2>
+    {% set bookshelf = get_section(path="books/_index.md") %}
+    {%- for book in bookshelf.pages %}
+      {%- set ext = book.extra.book_cover_angle | split(pat=".") | last %}
+      <article>
+        <aside>
+          <picture>
+            <source srcset="/images/covers/{{book.extra.book_cover_angle| replace(from=ext, to='webp')}}" type="image/{{ext | replace(from=ext, to='webp')}}">
+            <source srcset="/images/covers/{{book.extra.book_cover_angle}}" type="image/png">
+            <img src="/images/covers/{{book.extra.book_cover_angle}}" alt="" />
+          </picture>
+        </aside>
+        <section>
+          <h3>{{ book.title }}</h3>
+          {{ book.content | safe }}
+          {% if book.extra.book_released %}
+          <!-- Book Purchase CTA -->
+          <div data-toggle="buttons" class='cta-buttons'>
+            {%- if book.extra.book_amazon_pback -%}
+          	<a href='{{book.extra.book_amazon_pback}}' onClick="ga('send', 'event', 'Button', 'Click', 'Amazon: {{book.title}} Paperback');" target='_blank' >
+              <i class="fad fa-book-open"></i>
+              <span>Buy {{book.title}} as </span>Paperback
+            </a>
+            {% endif %}
+            {%- if book.extra.book_amazon_ebook -%}
+          	<a class='success' href='{{book.extra.book_amazon_ebook}}' onClick="ga('send', 'event', 'Button', 'Click', 'Amazon: {{book.title}} Kindle');" target='_blank' >
+              <i class="fad fa-tablet-android-alt"></i>
+              <span>Buy {{book.title}} as </span>Kindle
+            </a>
+            {% endif %}
+            {%- if book.extra.amazon.audible -%}
+            <a class='warning' href='{{book.book_amazon_ebook}}' onClick="ga('send', 'event', 'Button', 'Click', 'Amazon: {{book.title}} Audible');" target='_blank' >
+              <i class="fab fa-audible"></i>
+              <span>Buy {{book.title}} as </span>Audible
+            </a>
+            {%- endif -%}
+          </div>
+          <!-- /Book Purchase CTA -->
+          {% endif %}
+        </section>
       </article>
-    </main>
-    <footer>
-      <div>Hello from VENUE</div>
-      <div><a href="/legal#privacy">Privacy</a></div>
-      <div><a href="/legal#terms">Terms</a></div>
-      <div>Copyright YEAR</div>
-    </footer>
-  </body>
-</html>
+    {%- endfor %}
+  </section>
+{% endblock %}

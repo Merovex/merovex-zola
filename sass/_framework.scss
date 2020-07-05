@@ -18,6 +18,7 @@
   }
 }
 html {
+  scroll-behavior: smooth;
   body {
     & > header {
       display: flex;
@@ -29,14 +30,21 @@ html {
       flex-grow: 1;
       min-height: calc(100vh - 4.5em);
       display: flex;
-      justify-content: space-around;
+      flex-direction: column;
+      justify-content: center;
       font-family: var(--font-body);
     }
     & > footer {
       display: flex;
       line-height: 1;
-      background: rgba(#000, 0.2);
-      color: white;
+      background: var(--footer-bg);
+      color: var(--footer-fg);
+      a {
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
       height: 2.5em;
       flex-direction: row;
       justify-content: space-around;

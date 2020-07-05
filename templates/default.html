@@ -44,6 +44,13 @@
       </nav>
     </header>
     <main>
+      {%- if config.extra.debug %}
+      <div class="debug">
+        <pre>
+          {{ __tera_context |striptags }}
+        </pre>
+      </div>
+      {%- endif %}
       {% block content %}
       {% endblock content %}
     </main>
@@ -54,8 +61,8 @@
         {%- endif %}
         Hello from {{config.extra.venue}}
       </div>
-      <div><a href="/legal#privacy">Privacy</a></div>
-      <div><a href="/legal#terms">Terms</a></div>
+      <div><a href="/privacy">Privacy</a></div>
+      <div><a href="/terms">Terms</a></div>
       <div>
         {%- if config.extra.copyright_icon %}
         <i class="far fa-copyright"></i>

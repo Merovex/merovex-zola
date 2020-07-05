@@ -1,0 +1,40 @@
+{%- if book %}
+{%- set ext = book.extra.book_cover_angle | split(pat=".") | last %}
+<article>
+  <aside>
+    <picture>
+      <source srcset="/images/covers/{{book.extra.book_cover_angle| replace(from=ext, to='webp')}}" type="image/{{ext | replace(from=ext, to='webp')}}">
+      <source srcset="/images/covers/{{book.extra.book_cover_angle}}" type="image/png">
+      <img src="/images/covers/{{book.extra.book_cover_angle}}" alt="" />
+    </picture>
+  </aside>
+  <section>
+    <h3>{{ book.title }}</h3>
+    {{ book.content | safe }}
+    {% if book.extra.book_released %}
+    <!-- Book Purchase CTA -->
+    <div data-toggle="buttons" class='cta-buttons'>
+      {%- if book.extra.book_amazon_pback -%}
+      <a href='{{book.extra.book_amazon_pback}}' onClick="ga('send', 'event', 'Button', 'Click', 'Amazon: {{book.title}} Paperback');" target='_blank' >
+        <i class="fad fa-book-open"></i>
+        <span>Buy {{book.title}} as </span>Paperback
+      </a>
+      {% endif %}
+      {%- if book.extra.book_amazon_ebook -%}
+      <a class='success' href='{{book.extra.book_amazon_ebook}}' onClick="ga('send', 'event', 'Button', 'Click', 'Amazon: {{book.title}} Kindle');" target='_blank' >
+        <i class="fad fa-tablet-android-alt"></i>
+        <span>Buy {{book.title}} as </span>Kindle
+      </a>
+      {% endif %}
+      {%- if book.extra.amazon.audible -%}
+      <a class='warning' href='{{book.book_amazon_ebook}}' onClick="ga('send', 'event', 'Button', 'Click', 'Amazon: {{book.title}} Audible');" target='_blank' >
+        <i class="fab fa-audible"></i>
+        <span>Buy {{book.title}} as </span>Audible
+      </a>
+      {%- endif -%}
+    </div>
+    <!-- /Book Purchase CTA -->
+    {% endif %}
+  </section>
+</article>
+{% endif %}

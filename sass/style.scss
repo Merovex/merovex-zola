@@ -8,6 +8,7 @@
 @import 'form';
 @import 'headings';
 @import 'navbar';
+@import 'featured';
 
 a,
 area,
@@ -20,4 +21,7 @@ summary,
 textarea {
   -ms-touch-action: manipulation;
       touch-action: manipulation;
+}
+.debug {
+  display: none;
 }

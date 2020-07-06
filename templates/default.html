@@ -11,10 +11,11 @@
     <link rel="stylesheet" href="{{ get_url(path="style.css", trailing_slash=false) | safe }}">
     <script src="https://kit.fontawesome.com/2f758798a8.js" crossorigin="anonymous"></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
     {% if config.generate_feed -%}
       <link rel="alternate" type={% if config.feed_filename == "atom.xml" %}"application/atom+xml"{% else %}"application/rss+xml"{% endif %} title="RSS" href="{{ get_url(path=config.feed_filename) | safe }}">
     {% endif -%}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     {% block extra_head -%}
     {% endblock extra_head -%}

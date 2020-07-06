@@ -14,7 +14,7 @@
 {%- endmacro picture %}
 {%- macro icon(key) %}
   {%- set icons = load_data(path="content/icons.toml") %}
-  <i class="{{ icons | get(key=key) }}"></i>
+  <i class="{{ icons | get(key=key) }}" aria-hidden='true'></i>
 {%- endmacro icon %}
 {% macro book(book) %}
   <article class='book'>

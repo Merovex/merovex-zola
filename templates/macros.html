@@ -1,0 +1,38 @@
+{% macro amz(name,path,type) %}
+  {%- if path -%}
+  <a href='{{path|safe}}' onClick="ga('send', 'event', 'Button', 'Click', 'Amazon: {{name}} {{type}}');" target='_blank' >
+    {{- macros::icon(key=type)}} <span>Buy {{name}} as </span>{{type}}</a>
+  {% endif %}
+{%- endmacro amz %}
+{%- macro picture(img,dir="") %}
+  {%- set ext = img | split(pat=".") | last %}
+  <picture>
+    <source srcset="/images/{{dir}}/{{img| replace(from=ext, to='webp')}}" type="image/{{ext | replace(from=ext, to='webp')}}">
+    <source srcset="/images/{{dir}}/{{img}}" type="image/{{ext | replace(from='jpg', to='jpeg')}}">
+    <img src="/images/{{dir}}/{{img}}" alt="" />
+  </picture>
+{%- endmacro picture %}
+{%- macro icon(key) %}
+  {%- set icons = load_data(path="content/icons.toml") %}
+  <i class="{{ icons | get(key=key) }}"></i>
+{%- endmacro icon %}
+{% macro book(book) %}
+  <article class='book'>
+    <aside>
+      {{ macros::picture(img=book.extra.cover_angle, dir='covers') }}
+    </aside>
+    <section>
+      <h3>{{ book.title }}</h3>
+      {{ book.content | safe }}
+      {%- if book.extra.released %}
+      <!-- Book Purchase CTA -->
+      <div data-toggle="buttons" class='cta-buttons'>
+        {%- for link in book.extra.amz_links %}
+          {{ macros::amz(name=book.title,path=link.path,type=link.type)}}
+        {%- endfor %}
+      </div>
+      <!-- /Book Purchase CTA -->
+      {%- endif %}
+    </section>
+  </article>
+{% endmacro book %}

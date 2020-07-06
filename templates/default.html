@@ -1,3 +1,4 @@
+{%- import "macros.html" as macros %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -30,13 +31,14 @@
           {%- for link in config.extra.site_menu %}
           <a href="{{link.path | safe }}">
             {%- if link.icon %}
-            <i class="{{link.icon}}"></i>
+            {{macros::icon(key=link.name)}}
             {%- endif %}
             {{link.name}}
           </a>
           {%- endfor %}
           {%- if config.extra.subscribe %}
           <a class='subscribe' href={{config.extra.subscribe.path|safe}}>
+            {{macros::icon(key="Inbox")}}
             {{config.extra.subscribe.name}}
           </a>
           {%- endif %}
@@ -57,7 +59,7 @@
     <footer>
       <div>
         {%- if config.extra.venue_icon %}
-        <i class="far fa-laugh"></i>
+        {{macros::icon(key='Venue')}}
         {%- endif %}
         Hello from {{config.extra.venue}}
       </div>
@@ -65,7 +67,7 @@
       <div><a href="/terms">Terms</a></div>
       <div>
         {%- if config.extra.copyright_icon %}
-        <i class="far fa-copyright"></i>
+        {{macros::icon(key='Copyright')}}
         {%- else %}
         &copy;
         {%- endif %}

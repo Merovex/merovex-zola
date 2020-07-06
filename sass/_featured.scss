@@ -1,7 +1,52 @@
 .featured {
-  background: var(--orange);
   height: 84vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--primary-dark) url(/images/hero/asfalt-light.png);
+  article {
+    max-width: 1200px;
+    width: 100%;
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    color: var(--white);
+    section {
+      padding-left: 2em;
+      font-size: 1.5rem;
+      h3 {
+        font-family: Oswald;
+        font-size: 3em;
+      }
+      a {
+        margin: 0 1em;
+      }
+      .cta-buttons a {
+        background: var(--hero-button);
+        color: var(--hero-button-text);
+        text-shadow: 1px 1px 1px #CCC;
+        &:hover {
+          background: var(--red);
+          color: var(--white);
+        }
+      }
+    }
+  }
+}
+
+dl.reviews {
+  dt {
+    font: 1.6rem var(--font-system);
+    display: flex;
+    align-items: center;
+    span {
+      margin-left: 1em;
+      display: flex;
+      align-items: center;
+    }
+    .fa-star {
+      color: var(--orange);
+      font-size: 0.6em;
+    }
+  }
 }

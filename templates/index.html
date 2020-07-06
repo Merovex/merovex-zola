@@ -1,19 +1,41 @@
 {% extends "default.html" %}
+{% import "macros.html" as macros %}
 {% block content %}
   <section class="featured">
-    <article class="">
-      <h1>Featured</h1>
-    </article>
+    {% set bookshelf = get_section(path="books/_index.md") %}
+    {%- for book in bookshelf.pages %}
+    {%- if book.extra.featured %}
+    {{ macros::book(book=book) }}
+    {% endif %}
+    {% endfor %}
   </section>
   <section class="bookshelf main" id='books'>
     <h2>Books</h2>
-    {% set bookshelf = get_section(path="books/_index.md") %}
+    {%- set bookshelf = get_section(path="books/_index.md") %}
     {%- for book in bookshelf.pages %}
-      {{ book_item(book=book) }}
+    {{- macros::book(book=book) }}
     {%- endfor %}
   </section>
   <section class="main" id='bio'>
     {%- set page = get_page(path="about.md") %}
     {{ page.content | safe }}
   </section>
+  {% if config.extra.show_social %}
+  <section class='main' id='reviews'>
+    <h2>What Readers Say</h2>
+    <dl class="reviews">
+      {%- set reviews = get_section(path="social_proof/_index.md") %}
+      {%- for r in reviews.pages %}
+      <dt>
+        {{r.extra.book}}: {{r.title}}
+        <span>{%- for i in range(end=r.extra.stars) %}
+        <i class="fa fa-star" aria-hidden="true"></i>
+        {%- endfor %}</span>
+        <span class="sr-only">{{r.extra.stars}} Stars</span>
+      </dt>
+      <dd>{{r.content |safe}}</dd>
+      {%- endfor %}
+    </dl>
+  </section>
+  {% endif %}
 {% endblock %}

@@ -1,13 +1,11 @@
 {% extends "default.html" %}
+{% import "macros.html" as macros %}
 {% block content %}
 <article class="post">
   <header>
     <h1>{{ page.title }}</h1>
     <figure>
-      {%- set ext = page.extra.photo_image | split(pat=".") | last %}
-      <source srcset="/assets/images/articles/{{page.extra.photo_image}}" type="image/{{ext | replace(from='jpg', to='jpeg')}}">
-      <source srcset="/assets/images/articles/{{page.extra.photo_image| replace(from=ext, to='webp')}}" type="image/{{ext | replace(from=ext, to='webp')}}">
-      <img src="/images/articles/{{page.extra.photo_image}}" alt="" />
+      {{ macros::picture(img=page.extra.photo_image, dir='articles') }}
       <figcaption>
         {{page.extra.photo_caption}},
         <a href='{{page.extra.photo_url | safe }}'>{{page.extra.photo_creator}}</a>,
